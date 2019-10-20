@@ -21,6 +21,7 @@ import com.google.android.exoplayer2.Timeline;
 import com.google.android.exoplayer2.decoder.DecoderCounters;
 import com.google.android.exoplayer2.source.ConcatenatingMediaSource;
 import com.google.android.exoplayer2.source.DynamicConcatenatingMediaSource;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.source.hls.HlsMediaSource;
@@ -63,17 +64,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 
-/*
-Created by: Ayal Fieldust
-Date: 8/2017
 
-Description:
-This Example app was created to show a simple example of ExoPlayer Version 2.8.4.
-There is an option to play mp4 files or live stream content.
-Exoplayer provides options to play many different formats, so the code can easily be tweaked to play the requested format.
-Scroll down to "ADJUST HERE:" I & II to change between sources.
-Keep in mind that m3u8 files might be stale and you would need new sources.
+/**
+ * Reproducción de ExoPlayer a través de microservicio Rest.
+ *
+ * @author  Kevin Paul Montealegre Melo
+ * @version 1.3
  */
+
 public class MainActivity extends AppCompatActivity implements VideoRendererEventListener {
 
     private static final String TAG = "MainActivity";
@@ -98,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements VideoRendererEven
         resolutionTextView = (TextView) findViewById(R.id.resolution_textView);
         test();
 
-        boton = findViewById(R.id.exo_next);
 
 
 
@@ -175,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements VideoRendererEven
         mQueue = Volley.newRequestQueue(this);
 
 
-        String url = "http://headendredir.terraformed.services/canales/1";
+        String url = "http://headendredir.terraformed.services/canales/2";
 
 
 
@@ -200,18 +197,15 @@ public class MainActivity extends AppCompatActivity implements VideoRendererEven
 
                             }
 
-
-
                             ArrayList<MediaSource> sources = new ArrayList<>();
                             for (int i=0;i< links.size();i++) {
-                                MediaSource mediaSource = new HlsMediaSource(Uri.parse(links.get(i)), dataSourceFactory, 1, null, null);
-                                sources.add(mediaSource);
+                                MediaSource videoSource = new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(links.get(i)));
+                                sources.add(videoSource);
                             }
                             dynamicConcatenatingMediaSource = new DynamicConcatenatingMediaSource();
                             dynamicConcatenatingMediaSource.addMediaSources(sources);
                             // concatenatedSource = new ConcatenatingMediaSource(videoSource, videoSource2, videoSource3);
                             // Prepare the player with the source.
-
 
                             for (int i = 0; i < links.size(); i++) {
                                 Log.e("HOLAAA", links.get(i));
@@ -219,8 +213,6 @@ public class MainActivity extends AppCompatActivity implements VideoRendererEven
 
                             player.prepare(dynamicConcatenatingMediaSource);
 
-
-                            boton = findViewById(R.id.exo_next);
 
 
                         } catch (JSONException e) {
