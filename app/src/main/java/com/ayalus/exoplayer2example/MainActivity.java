@@ -24,6 +24,7 @@ import com.google.android.exoplayer2.source.DynamicConcatenatingMediaSource;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.TrackGroupArray;
+import com.google.android.exoplayer2.source.hls.HlsMediaSource;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements VideoRendererEven
         // 5. Metodo REST para obtener los canales dinamicos //
 
         mQueue = Volley.newRequestQueue(this);
-        String url = "http://headendredir.terraformed.services/canales/2";
+        String url = "http://headendredir.terraformed.services/canales/3";
         links = new ArrayList<String>();
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -141,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements VideoRendererEven
                             }
                             ArrayList<MediaSource> sources = new ArrayList<>();
                             for (int i=0;i< links.size();i++) {
-                                MediaSource videoSource = new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(links.get(i)));
+                                MediaSource videoSource = new HlsMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(links.get(i)));
                                 sources.add(videoSource);
                             }
                             dynamicConcatenatingMediaSource = new DynamicConcatenatingMediaSource();
