@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/Black"
     android:keepScreenOn="true"
-    tools:context="com.ayalus.exoplayer2example.MainActivity">
+    tools:context="com.ayalus.exoplayer2example.Activities.MainActivity">
 
 
     <TextView

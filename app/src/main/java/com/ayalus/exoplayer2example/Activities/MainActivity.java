@@ -1,4 +1,4 @@
-package com.ayalus.exoplayer2example;
+package com.ayalus.exoplayer2example.Activities;
 
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.ayalus.exoplayer2example.Controllers.CanalesIDInterface;
+import com.ayalus.exoplayer2example.Entities.PostCanalesID;
+import com.ayalus.exoplayer2example.R;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -21,7 +24,6 @@ import com.google.android.exoplayer2.Timeline;
 import com.google.android.exoplayer2.decoder.DecoderCounters;
 import com.google.android.exoplayer2.source.ConcatenatingMediaSource;
 import com.google.android.exoplayer2.source.DynamicConcatenatingMediaSource;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.source.hls.HlsMediaSource;

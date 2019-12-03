@@ -1,4 +1,4 @@
-package com.ayalus.exoplayer2example;
+package com.ayalus.exoplayer2example.Entities;
 
 public class PostCanalesID {
 
